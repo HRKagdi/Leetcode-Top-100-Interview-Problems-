@@ -52,3 +52,51 @@ public:
         return ans;
     }
 };
+
+
+/// Contributer: https://github.com/harshchaplot
+// Solutions in Java by Harsh Chaplot
+/*Approach: Whenever we see an element greater than the top of the stack we pop it and find the profit we can make 
+with this trade and we keep on doing that until we have an empty stack or we see an element greater 
+than the current element(in which case we won't be able to make any profit). We take the maximum of the 
+profit obtained here and add it to our total profit. 
+If the stack is empty or the current element is greater than the top of the stack we simply push it onto the stack.
+*/
+
+class Solution {
+    public int maxProfit(int[] prices) {
+        Stack<Integer> stack = new Stack<>();
+        int n = prices.length;
+        int totalProfit = 0;
+        for ( int i=0; i<n; i++ ) {
+            int currMax = 0;
+            while ( !stack.isEmpty() && stack.peek()<prices[i] ) {
+                currMax = Math.max(currMax, prices[i]-stack.pop());
+            }
+            totalProfit += currMax;
+            stack.push(prices[i]);
+        }
+        return totalProfit;
+    }
+}
+
+/*
+Also, we can approach this problem with constant space and O(n). In the previous approach we were(in the worst case) visiting every element twice, essentially making it O(2*n).
+
+Approach: Every time we see an element greater than the previous element we add the difference to our profit and return this profit at the end. 
+This works because we can sell and buy a stock on the same day. Also if we have something like [1,4,5],
+then usually what we do is buy on day 1 and sell on day 3 but since there are no restrictions on the number of trades we can make, 
+we can buy on day 1 -> sell on day 2, again buy on day 2 -> sell on day 3 which yields us the same profit.
+*/
+
+class Solution {
+    public int maxProfit(int[] prices) {
+        int profit = 0;
+        for ( int i=0; i<prices.length-1; i++ ) {
+            if ( prices[i+1]>prices[i] ) {
+                profit += prices[i+1] - prices[i];
+            }
+        }
+        return profit;
+    }
+}
