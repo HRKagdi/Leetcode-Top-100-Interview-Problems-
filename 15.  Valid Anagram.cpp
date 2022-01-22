@@ -29,3 +29,45 @@ public:
         return (s==t);
     }
 };
+
+/*
+Java Solution
+Same approach as above
+*/
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        char[] s1 = s.toCharArray();
+        char[] s2 = t.toCharArray();
+        Arrays.sort(s1);
+        Arrays.sort(s2);
+        return String.valueOf(s1).equals(String.valueOf(s2));
+    }
+}
+
+/*
+Java Solution
+Approach:
+We create an array of length 26 to store the frequencies of each character. When we iterate over the first string we increment the frequency of that character and while going over the second string we decrement the count. At the end we check if the whole array contains 0 then they are anagrams otherwise they are not.
+Time Complexity: O(n), Space: O(26) = O(1).
+*/
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        int[] count = new int[26];
+        int n = s.length();
+        if ( n!=t.length() ) {
+            return false;
+        }
+        for ( int i=0; i<n; i++ ) {
+            count[s.charAt(i)-'a']++;
+        }
+        for ( int i=0; i<n; i++ ) {
+            count[t.charAt(i)-'a']--;
+        }
+        for ( int i=0; i<26; i++ ) {
+            if ( count[i]!=0 ) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
