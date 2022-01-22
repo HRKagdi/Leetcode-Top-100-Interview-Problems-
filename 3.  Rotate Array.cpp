@@ -60,3 +60,51 @@ public:
         reverse(nums.begin()+k,nums.end());
     }
 };
+
+/*
+Java Solution
+Approach 1
+*/
+
+class Solution {
+    public void rotate(int[] nums, int k) {
+        k = k % nums.length;
+        int[] v = new int[k];
+        int j = 0;
+        for(int i=nums.length-k; i<nums.length; i++){
+            v[j++] = nums[i];
+        }
+        for(int i = nums.length-k-1; i>=0; i--){
+            nums[i+k] = nums[i];
+        }
+        for(int i=0; i<k; i++){
+            nums[i] = v[i];
+        }
+    }
+}
+
+/*
+Java Solution
+Approach 2
+*/
+
+class Solution {
+    public void rotate(int[] nums, int k) {
+        k = k%nums.length;
+        reverse(nums, 0, nums.length-1);
+        reverse(nums, 0, k);
+        reverse(nums, k, nums.length-1);
+    }
+    public void reverse( int[] nums, int l, int r ) {
+        while ( l<r ) {
+            swap(nums, l, r);
+            l++;
+            r--;
+        }
+    }
+    public void swap( int[] nums, int i, int j ) {
+        int tmp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = tmp;
+    }
+}
