@@ -1,0 +1,25 @@
+//https://leetcode.com/explore/interview/card/top-interview-questions-easy/94/trees/555/
+
+/*
+Given the root of a binary tree, return its maximum depth.
+
+A binary tree's maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.
+*/
+
+// Simplest question on trees and is used as helper function in many questions.
+// Logic: We recusrively find heights of left and right subtree, take maximum of them and add 1 for root.
+/*
+Input: root = [3,9,20,null,null,15,7]
+Output: 3
+Input: root = [1,null,2]
+Output: 2
+Time COmplexity: O(Log(n)) ,n is heght of tree.
+Space comlexity: O(log(n)) ,n is height of tree.
+*/
+class Solution {
+public:
+    int maxDepth(TreeNode* root) {
+        if(root==NULL) return 0;
+        return 1 + max(maxDepth(root->left), maxDepth(root->right));
+    }
+};
