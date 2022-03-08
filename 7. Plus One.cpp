@@ -39,3 +39,26 @@ public:
         return digits;
     }
 };
+
+/*
+Java Solution
+Same approach as above
+*/
+class Solution {
+    public int[] plusOne(int[] digits) {
+        int i = digits.length-1;
+        while ( i>=0 ) {
+            if( digits[i]<9 ) {
+                break;
+            }
+            digits[i--] = 0;
+        }
+        if ( i==-1 ) {
+            int[] v = new int[digits.length+1];
+            v[0]=1;
+            return v;
+        }
+        digits[i]++;
+        return digits;
+    }
+};

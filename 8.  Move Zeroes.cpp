@@ -31,3 +31,47 @@ public:
         }
     }
 };
+
+/*
+Java Solution
+Same approach
+Time Complexit; O(N)(two pass), Space Complexity: O(1)
+*/
+
+class Solution {
+    public void moveZeroes(int[] nums) {
+        int zeroes = 0;
+        for ( int i: nums ) {
+            zeroes += i==0 ? 1 : 0;
+        }
+        int index = 0;
+        for ( int i=0; i<nums.length; i++ ) {
+            if ( nums[i]!=0 ) {
+                nums[index++] = nums[i];
+            }
+        }
+        for ( int i=nums.length-zeroes; i<nums.length; i++ ) {
+            nums[i] = 0;
+        }
+    }
+}
+
+/*
+Approach 2:
+Algorithm:
+Actually we don't need to calculate zeroes. We just check if the current number is 0, then we skip it otherwise we put the non zero number here and increment the index.
+Time Complexity: O(n), single pass. Space Complexity: O(1)
+*/
+class Solution {
+    public void moveZeroes(int[] nums) {
+        int index = 0;
+        for ( int i=0; i<nums.length; i++ ) {
+            if ( nums[i]!=0 ) {
+                nums[index++] = nums[i];
+            }
+        }
+        for ( int i=index; i<nums.length; i++ ) {
+            nums[i] = 0;
+        }
+    }
+}

@@ -27,3 +27,39 @@ public:
         return false;
     }
 };
+
+/*
+Java Solution
+*/
+class Solution {
+    public boolean containsDuplicate(int[] nums) {
+        Arrays.sort(nums);
+        for ( int i=1; i<nums.length; i++ ) {
+            if ( nums[i]==nums[i-1] ) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
+
+/*
+Algo:
+1) Maintain a hashset.
+2) Iterate over the array and check if the current element is in the set.
+    a) If it is, return true.
+    b) If not, add the current element to the set.
+*/
+class Solution {
+    public boolean containsDuplicate(int[] nums) {
+        HashSet<Integer> distinct = new HashSet<>();
+        for ( int num: nums ) {
+            if ( distinct.contains(num) ) {
+                return true;
+            }
+            distinct.add(num);
+        }
+        return false;
+    }
+}
